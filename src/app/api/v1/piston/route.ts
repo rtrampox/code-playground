@@ -3,21 +3,15 @@ import axios from "axios";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-	const { language, files }: { language: Language; files: Files } =
-		await req.json();
-
-	console.log(language, files);
+	const { language, files }: { language: Language; files: Files } = await req.json();
 
 	const lang = languages[language];
 
-	const data = await axios.post(
-		"https://apis.rtrampox.cloud/piston/api/v2/execute",
-		{
-			language: lang.language,
-			version: lang.version,
-			files,
-		},
-	);
+	const data = await axios.post("https://apis.rtrampox.cloud/piston/api/v2/execute", {
+		language: lang.language,
+		version: lang.version,
+		files,
+	});
 
 	return NextResponse.json(data.data, { status: data.status });
 }

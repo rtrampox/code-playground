@@ -1,15 +1,7 @@
 "use client";
 
 import { Language, PistonAPIResponse } from "@/lib/types";
-import {
-	AlertTriangle,
-	Braces,
-	CircleAlert,
-	Loader2,
-	Play,
-	SquareChevronRight,
-	XIcon,
-} from "lucide-react";
+import { AlertTriangle, Braces, CircleAlert, Loader2, Play, SquareChevronRight, XIcon } from "lucide-react";
 import { LanguageDropdown } from "./language-dropdown";
 import { Markers } from "./editor";
 import { useMenuButtonsStore } from "@/app/stores/menubuttons";
@@ -44,9 +36,7 @@ export function MenuButtons({
 						>
 							<SquareChevronRight size={15} />
 							<p>Console</p>
-							{isError ? (
-								<AlertTriangle size={15} className="text-red-500" />
-							) : null}
+							{isError ? <AlertTriangle size={15} className="text-red-500" /> : null}
 						</button>
 
 						<div className="w-[1px] h-full bg-white" />
@@ -73,9 +63,7 @@ export function MenuButtons({
 						>
 							<Play size={15} />
 							<p>Run Code</p>
-							{isPending ? (
-								<Loader2 className="animate-spin" size={15} />
-							) : null}
+							{isPending ? <Loader2 className="animate-spin" size={15} /> : null}
 						</button>
 					</div>
 					<div>
@@ -105,9 +93,7 @@ export function MenuButtons({
 								</div>
 							) : (
 								<pre className={isError ? "text-red-500" : ""}>
-									{consoleData && consoleData
-										? consoleData?.run.output
-										: "Run the code to see output"}
+									{consoleData && consoleData ? consoleData?.run.output : "Run the code to see output"}
 								</pre>
 							)}
 						</div>

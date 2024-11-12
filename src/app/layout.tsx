@@ -21,8 +21,7 @@ export const metadata: Metadata = {
 		default: "Code Playground",
 		template: "%s - Playground",
 	},
-	description:
-		"Welcome to Code Playground, a place to learn and practice coding.",
+	description: "Welcome to Code Playground, a place to learn and practice coding.",
 };
 
 export default function RootLayout({

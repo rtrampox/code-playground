@@ -14,9 +14,7 @@ const getQueryClient = () => {
 	return (clientQueryClientSingleton ??= createQueryClient());
 };
 
-export function ReactQueryProvider({
-	children,
-}: { children: React.ReactNode }) {
+export function ReactQueryProvider({ children }: { children: React.ReactNode }) {
 	const queryClient = getQueryClient();
 	return (
 		<QueryClientProvider client={queryClient}>

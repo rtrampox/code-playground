@@ -5,11 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { MenuButtons } from "@/components/menu-buttons";
 import { submitCode } from "./mutations/submitCode";
-import {
-	CodeEditor,
-	IStandaloneCodeEditor,
-	Markers,
-} from "@/components/editor";
+import { CodeEditor, IStandaloneCodeEditor, Markers } from "@/components/editor";
 import { Language } from "@/lib/types";
 import { useToast } from "@/hooks/use-toast";
 import { useMenuButtonsStore } from "./stores/menubuttons";
@@ -47,8 +43,7 @@ export default function Home() {
 		const getLanguage = localStorage.getItem("language");
 		if (getCode) {
 			toast({
-				description:
-					"Welcome back! We restored the code from your last session.",
+				description: "Welcome back! We restored the code from your last session.",
 			});
 			setCode(getCode);
 		}
@@ -84,9 +79,7 @@ export default function Home() {
 	function handleEditorValidation(markers: Markers) {
 		// model markers
 		setValidationErrors(markers);
-		markers.forEach((marker) =>
-			console.log("Validation error:", marker.message),
-		);
+		markers.forEach((marker) => console.log("Validation error:", marker.message));
 	}
 
 	return (

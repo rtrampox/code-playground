@@ -28,16 +28,9 @@ export function LanguageDropdown({
 			<DropdownMenuContent className="w-56" align="end">
 				<DropdownMenuLabel>Panel Position</DropdownMenuLabel>
 				<DropdownMenuSeparator />
-				<DropdownMenuRadioGroup
-					value={language}
-					onValueChange={(v) => setLanguage(v as Language)}
-				>
-					<DropdownMenuRadioItem value="typescript">
-						Typescript
-					</DropdownMenuRadioItem>
-					<DropdownMenuRadioItem value="javascript">
-						Javascript
-					</DropdownMenuRadioItem>
+				<DropdownMenuRadioGroup value={language} onValueChange={(v) => setLanguage(v as Language)}>
+					<DropdownMenuRadioItem value="typescript">Typescript</DropdownMenuRadioItem>
+					<DropdownMenuRadioItem value="javascript">Javascript</DropdownMenuRadioItem>
 					<DropdownMenuRadioItem value="go">Go</DropdownMenuRadioItem>
 					<DropdownMenuRadioItem value="python" disabled>
 						Python
