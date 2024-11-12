@@ -26,3 +26,8 @@ export const languages: Record<
 	go: { language: "go", version: "1.16.2", filetype: "go" },
 	python: { language: "python", version: "3.10.0", filetype: "py" },
 };
+
+export type Files = {
+	name: string;
+	content: string;
+}[];

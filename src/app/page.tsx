@@ -12,12 +12,14 @@ import {
 } from "@/components/editor";
 import { Language } from "@/lib/types";
 import { useToast } from "@/hooks/use-toast";
+import { useMenuButtonsStore } from "./stores/menubuttons";
 
 export default function Home() {
 	const { toast } = useToast();
 
 	const editorRef = useRef<IStandaloneCodeEditor | null>(null);
 
+	const { setIsConsoleOpen } = useMenuButtonsStore();
 	const [code, setCode] = useState<string | undefined>(undefined);
 	const [language, setLanguage] = useState<Language>("javascript");
 	const [validationErrors, setValidationErrors] = useState<Markers>([]);
@@ -25,6 +27,7 @@ export default function Home() {
 	const submit = useMutation({
 		mutationFn: (data: string) => submitCode(data, language),
 		onSuccess: async (data) => {
+			setIsConsoleOpen(true);
 			console.log("Output:\n\n", data.data.run.output);
 		},
 	});
@@ -58,6 +61,19 @@ export default function Home() {
 		storeCode(code);
 		storeLanguage(language as Language);
 	}, [code, storeCode, storeLanguage, language]);
+
+	useEffect(() => {
+		const handleKeyDown = (event: KeyboardEvent) => {
+			if (event.ctrlKey && event.key === "Enter") {
+				onSubmit();
+			}
+		};
+
+		window.addEventListener("keydown", handleKeyDown);
+		return () => {
+			window.removeEventListener("keydown", handleKeyDown);
+		};
+	}, []);
 
 	async function onSubmit() {
 		if (editorRef.current?.getValue()) {

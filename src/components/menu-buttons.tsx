@@ -10,14 +10,9 @@ import {
 	SquareChevronRight,
 	XIcon,
 } from "lucide-react";
-import { useState } from "react";
 import { LanguageDropdown } from "./language-dropdown";
 import { Markers } from "./editor";
-
-export function MenuButtonsState() {
-	const [isConsoleOpen, setIsConsoleOpen] = useState(false);
-	return { isConsoleOpen, setIsConsoleOpen };
-}
+import { useMenuButtonsStore } from "@/app/stores/menubuttons";
 
 export function MenuButtons({
 	isPending,
@@ -34,8 +29,7 @@ export function MenuButtons({
 	language: Language;
 	setLanguage: (v: Language) => void;
 }) {
-	const { isConsoleOpen, setIsConsoleOpen } = MenuButtonsState();
-	const [isErrorsOpen, setIsErrorsOpen] = useState(false);
+	const { isConsoleOpen, setIsConsoleOpen, isIssuesOpen, setIsIssuesOpen } = useMenuButtonsStore();
 
 	const isError = consoleData && consoleData.run.code !== 0;
 
@@ -58,11 +52,11 @@ export function MenuButtons({
 						<div className="w-[1px] h-full bg-white" />
 
 						<button
-							className={`flex flex-row gap-2 items-center p-1 ${isErrorsOpen && "bg-neutral-700"} ${errors.length > 0 && "text-red-500"}`}
-							onClick={() => setIsErrorsOpen(!isErrorsOpen)}
+							className={`flex flex-row gap-2 items-center p-1 ${isIssuesOpen && "bg-neutral-700"} ${errors.length > 0 && "text-red-500"}`}
+							onClick={() => setIsIssuesOpen(!isIssuesOpen)}
 						>
 							<CircleAlert size={15} />
-							<p>Errors</p>
+							<p>Issues</p>
 							{errors.length > 0 ? (
 								<div className="size-5 rounded-full text-red-500 text-center flex items-center">
 									{errors.length}
@@ -120,12 +114,12 @@ export function MenuButtons({
 					</div>
 				</>
 			)}
-			{isErrorsOpen && (
+			{isIssuesOpen && (
 				<>
 					<div className="bg-neutral-900 p-4 w-full h-40 text-white bottom-12 space-y-2 left-0">
 						<div className="flex flex-row gap-2 justify-between items-center">
 							<p>Errors:</p>
-							<XIcon size={15} onClick={() => setIsErrorsOpen(false)} />
+							<XIcon size={15} onClick={() => setIsIssuesOpen(false)} />
 						</div>
 						<div
 							className={`border ${isError ? "border-red-500" : "border-neutral-500 "} rounded-md overflow-y-auto h-24 p-2`}

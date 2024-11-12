@@ -4,9 +4,8 @@ import axios from "axios";
 export const submitCode = async (code: string, language: Language) => {
 	const lang = languages[language];
 
-	return await axios.post("https://apis.rtrampox.cloud/piston/api/v2/execute", {
-		language: lang.language,
-		version: lang.version,
+	return await axios.post("/api/v1/piston", {
+		language,
 		files: [
 			{
 				name: `playground.${lang.filetype}`,
